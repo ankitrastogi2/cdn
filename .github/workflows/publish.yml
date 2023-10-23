@@ -20,6 +20,6 @@ jobs:
               shell: bash
             - name: publish
               run: npm publish --access public
-              working-directory: ./
+              working-directory: package
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
