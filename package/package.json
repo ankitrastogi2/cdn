@@ -1,0 +1,22 @@
+{
+  "name": "@ankitrastogiinorg/cdn",
+  "version": "1.1.3",
+  "description": "cdn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankitrastogi2/cdn.git"
+  },
+  "keywords": [
+    "cdn"
+  ],
+  "author": "ankit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ankitrastogi2/cdn/issues"
+  },
+  "homepage": "https://github.com/ankitrastogi2/cdn#readme"
+}
