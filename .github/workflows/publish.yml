@@ -1,20 +1,34 @@
-name: "publish npm"
+name: "Publish NPM Package"
 
-on: push
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
 
 jobs:
-    publish:
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout
-              uses: actions/checkout@v2
-            - name: node
-              uses: actions/setup-node@v2
-              with:
-                  node-version: 12
-                  registry-url: https://registry.npmjs.org
-            - name: publish
-              run: npm publish --access public
-              working-directory: ./
-              env:
-                  NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Configure Git
+        run: |
+          git config user.name "Your Name"
+          git config user.email "youremail@example.com"
+
+      - name: Run Semantic Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npx semantic-release
