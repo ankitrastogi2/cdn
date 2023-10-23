@@ -13,10 +13,14 @@ jobs:
               with:
                   node-version: 12
                   registry-url: https://registry.npmjs.org
+            - name: Configure Git Identity
+              run: |
+                git config --global user.email "you@example.com"
+                git config --global user.name "Your Name"
+              shell: bash
             - name: increment-version
               run: |
-                # Increment the package.json version using npm version
-                npm version patch # You can use "major" or "minor" for different version increments
+                npm version patch
               working-directory: ./
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
