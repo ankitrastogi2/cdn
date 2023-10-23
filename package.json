@@ -1,7 +1,7 @@
 {
-  "name": "@ankitrastogi2/cdn",
+  "name": "@ankitrastogiinorg/cdn",
   "version": "1.0.1",
-  "description": "cdn test",
+  "description": "cdn",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,8 +18,5 @@
   "bugs": {
     "url": "https://github.com/ankitrastogi2/cdn/issues"
   },
-  "homepage": "https://github.com/ankitrastogi2/cdn#readme",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+  "homepage": "https://github.com/ankitrastogi2/cdn#readme"
 }
