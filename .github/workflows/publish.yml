@@ -11,12 +11,12 @@ jobs:
             - name: node
               uses: actions/setup-node@v2
               with:
-                  node-version: 18
+                  node-version: 12
                   registry-url: https://registry.npmjs.org
             - name: Configure Git Identity
               run: |
-                git config --global user.email "ankit@gmail.com"
-                git config --global user.name "ankit"
+                git config --global user.email "you@example.com"
+                git config --global user.name "Your Name"
               shell: bash
             - name: increment-version
               run: |
