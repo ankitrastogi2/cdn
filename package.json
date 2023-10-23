@@ -1,6 +1,6 @@
 {
-  "name": "cdn",
-  "version": "1.0.0",
+  "name": "@ankitrastogi2/cdn",
+  "version": "1.0.1",
   "description": "cdn test",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/ankitrastogi2/cdn#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com"
   }
 }
