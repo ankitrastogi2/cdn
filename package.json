@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/ankitrastogi2/cdn/issues"
   },
-  "homepage": "https://github.com/ankitrastogi2/cdn#readme"
+  "homepage": "https://github.com/ankitrastogi2/cdn#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
