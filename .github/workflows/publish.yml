@@ -15,8 +15,8 @@ jobs:
                   registry-url: https://registry.npmjs.org
             - name: Configure Git Identity
               run: |
-                git config --global user.email
-                git config --global user.name
+                git config --global user.email "ankit@gmail.com"
+                git config --global user.name "ankit"
               shell: bash
             - name: increment-version
               run: |
