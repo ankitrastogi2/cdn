@@ -26,7 +26,7 @@ jobs:
           # Increase the package version (for example, using a semantic versioning bump)
           npm version patch
           git add .
-          git commit -am "Bump version"
+          git commit -m "Bump version"
           git push https://${{secrets.GH_PAT_TOKEN}}@github.com/$GITHUB_REPOSITORY.git HEAD:main
         working-directory: package
       - name: Publish
