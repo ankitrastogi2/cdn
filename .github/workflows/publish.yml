@@ -27,7 +27,8 @@ jobs:
           npm version patch
           git add .
           git commit -m "Bump version"
-          git push https://${{secrets.GH_PAT_TOKEN}}@github.com/$GITHUB_REPOSITORY.git HEAD:main
+          git push https://github.com/${{ github.repository }}.git HEAD:main
+
         working-directory: package
       - name: Publish
         run: |
@@ -36,3 +37,4 @@ jobs:
         working-directory: package
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
