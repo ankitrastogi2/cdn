@@ -26,7 +26,7 @@ jobs:
           # Increase the package version (for example, using a semantic versioning bump)
           npm version patch
           git add .
-          git commit -m "Bump version"
+          git remote add origin https://github.com/${{ github.repository }}.git
           git push https://github.com/${{ github.repository }}.git HEAD:main
 
         working-directory: package
