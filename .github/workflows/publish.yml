@@ -37,4 +37,5 @@ jobs:
         working-directory: package
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-          GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PAT_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
