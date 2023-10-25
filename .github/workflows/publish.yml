@@ -16,11 +16,6 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
-      - name: Configure Git Identity
-        run: |
-          git config --global user.email "ankitrastogichannel@gmail.com"
-          git config --global user.name "ankitrastogi2"
-        shell: bash
       - name: Update Package Version
         run: |
           # Increase the package version (for example, using a semantic versioning bump)
