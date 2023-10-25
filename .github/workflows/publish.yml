@@ -27,7 +27,7 @@ jobs:
           npm version patch
           git add .
           git commit -m "Bump version"
-          git push https://github.com/${{ github.repository }}.git HEAD:main
+          git push origin HEAD:main
 
         working-directory: package
       - name: Publish
