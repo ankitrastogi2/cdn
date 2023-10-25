@@ -25,6 +25,9 @@ jobs:
         run: |
           # Increase the package version (for example, using a semantic versioning bump)
           npm version patch
+          git add .
+          git commit -am "Bump version"
+          git push
         working-directory: package
       - name: Publish
         run: |
