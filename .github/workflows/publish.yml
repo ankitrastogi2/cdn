@@ -34,16 +34,16 @@ jobs:
                     echo "$DIR is not a React app."
                   fi
                 done
+            - name: Increment package version
+              run: |
+                npm version patch -m "Increment package version to %s"
+                git push
             - name: Commit and Push Changes
               run: |
                 git config --local user.email "action@github.com"
                 git config --local user.name "GitHub Action"
                 git add .
                 git commit -m "Automated build commit" -a || echo "No changes to commit"
-                git push
-            - name: Increment package version
-              run: |
-                npm version patch -m "Increment package version to %s"
                 git push
             - name: publish
               run: npm publish --access public
