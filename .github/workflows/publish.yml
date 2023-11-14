@@ -21,6 +21,16 @@ jobs:
                 git config --global user.email "you@example.com"
                 git config --global user.name "Your Name"
               shell: bash
+            - name: Find React apps and Build
+              run: |
+                for DIR in */ ; do
+                  if [ -f "$DIR/package.json" ]; then
+                    echo "Building React app in $DIR"
+                    (cd $DIR && npm install && npm run build)
+                  else
+                    echo "$DIR is not a React app."
+                  fi
+                done
             - name: publish
               run: npm publish --access public
               working-directory: package
