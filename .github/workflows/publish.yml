@@ -23,7 +23,7 @@ jobs:
               shell: bash
             - name: Find React apps and Build
               run: |
-                for DIR in package/ ; do
+                for DIR in package/asset_* ; do
                   if [ -f "$DIR/package.json" ]; then
                     echo "Building React app in $DIR"
                     (cd $DIR && npm install && npm run build)
