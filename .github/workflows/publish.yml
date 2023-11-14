@@ -6,6 +6,7 @@ on:
       - main
     paths-ignore:
       - '**/build/**'
+      - 'package/package.json'
 
 jobs:
     publish:
