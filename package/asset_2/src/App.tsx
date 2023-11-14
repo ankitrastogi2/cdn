@@ -5,6 +5,7 @@ function App() {
   return (
     <div className="App">
       <GGlobe/>
+      <h1>D</h1>
     </div>
   );
 }

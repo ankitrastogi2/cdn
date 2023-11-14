@@ -24,7 +24,7 @@ jobs:
             - name: Find React apps and Build
               run: |
                 for DIR in package/*/ ; do
-                  if git log -1 -- $DIR; then
+                  if git diff --name-only HEAD^ HEAD | grep -q "^$DIR"; then
                     if [ -f "$DIR/package.json" ]; then
                       echo "Building React app in $DIR"
                       (cd $DIR && npm install && npm run build -- --output-path ./build)
