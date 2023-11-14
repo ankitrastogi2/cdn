@@ -13,17 +13,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.issue.pull_request.head.ref }}
+          token: ${{ secrets.GH_PAT_TOKEN }}
 
-      - name: Build and Deploy
+      - name: Deploy to gh-pages
         run: |
-          # Add your build commands here
-          mkdir -p build/${GITHUB_REF##*/}
-          # Copy build files to build/<branch-name>
           git fetch origin gh-pages
           git checkout -b gh-pages origin/gh-pages
-          mv package/* package/${GITHUB_REF##*/}
-          git add .
-          git commit -m "Deploy ${GITHUB_REF##*/}"
+          mkdir -p build
+          cp -r package/* build/
+          git add build/
+          git commit -m "Deploy static files to gh-pages"
           git push origin gh-pages
 
       - name: Comment on PR
