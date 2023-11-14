@@ -23,6 +23,7 @@ jobs:
                   registry-url: https://registry.npmjs.org
             - name: Find React apps and Build
               run: |
+                git pull
                 for DIR in package/*/ ; do
                   if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q "^$DIR"; then
                     if [ -f "$DIR/package.json" ]; then
