@@ -24,12 +24,15 @@ jobs:
             - name: Find React apps and Build
               run: |
                 for DIR in package/*/ ; do
-                  if [ -f "$DIR/package.json" ]; then
-                  echo "Building React app in $DIR"
-                  # Change the build script as needed to specify the output directory
-                  (cd $DIR && npm install && npm run build -- --output-path ./build)
+                  if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q "^$DIR"; then
+                    if [ -f "$DIR/package.json" ]; then
+                      echo "Building React app in $DIR"
+                      (cd $DIR && npm install && npm run build -- --output-path ./build)
+                    else
+                      echo "$DIR is not a React app."
+                    fi
                   else
-                    echo "$DIR is not a React app."
+                    echo "No changes in $DIR"
                   fi
                 done
             - name: Commit and Push Changes
