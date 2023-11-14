@@ -41,6 +41,7 @@ jobs:
               run: |
                 git config --local user.email "action@github.com"
                 git config --local user.name "GitHub Action"
+                git pull
                 git add .
                 git commit -m "Automated build commit" -a || echo "No changes to commit"
                 git push
@@ -48,6 +49,7 @@ jobs:
               run: |
                 cd package/
                 npm version patch -m "Increment package version to %s"
+                git pull
                 git add .
                 git commit -m 'Updated version'
                 git push
