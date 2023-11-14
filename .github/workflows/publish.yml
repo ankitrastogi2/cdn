@@ -21,11 +21,6 @@ jobs:
               with:
                   node-version: 18
                   registry-url: https://registry.npmjs.org
-            - name: Configure Git Identity
-              run: |
-                git config --global user.email "you@example.com"
-                git config --global user.name "Your Name"
-              shell: bash
             - name: Find React apps and Build
               run: |
                 for DIR in package/*/ ; do
