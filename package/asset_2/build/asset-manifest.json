@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/globe/static/js/main.5d66acfc.js",
+    "index.html": "/globe/index.html",
+    "main.5d66acfc.js.map": "/globe/static/js/main.5d66acfc.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.5d66acfc.js"
+  ]
+}
