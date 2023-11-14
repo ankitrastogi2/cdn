@@ -21,7 +21,7 @@ jobs:
           # Copy build files to build/<branch-name>
           git fetch origin gh-pages
           git checkout -b gh-pages origin/gh-pages
-          mv build/* build/${GITHUB_REF##*/}
+          mv package/* package/${GITHUB_REF##*/}
           git add .
           git commit -m "Deploy ${GITHUB_REF##*/}"
           git push origin gh-pages
