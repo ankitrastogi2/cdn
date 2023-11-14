@@ -1,6 +1,6 @@
 {
   "name": "@ankitrastogiinorg/cdn",
-  "version": "1.3.22",
+  "version": "1.3.23",
   "description": "cdn",
   "main": "index.js",
   "scripts": {
