@@ -1,0 +1,34 @@
+name: Deploy on Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  deploy:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.issue.pull_request.head.ref }}
+
+      - name: Build and Deploy
+        run: |
+          # Add your build commands here
+          mkdir -p build/${GITHUB_REF##*/}
+          # Copy build files to build/<branch-name>
+          git fetch origin gh-pages
+          git checkout -b gh-pages origin/gh-pages
+          mv build/* build/${GITHUB_REF##*/}
+          git add .
+          git commit -m "Deploy ${GITHUB_REF##*/}"
+          git push origin gh-pages
+
+      - name: Comment on PR
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: Deployed to [https://${{ github.repository_owner }}.github.io/${{ github.repository }}/build/${GITHUB_REF##*/}] (https://${{ github.repository_owner }}.github.io/${{ github.repository }}/build/${GITHUB_REF##*/})
+
