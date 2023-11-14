@@ -32,6 +32,13 @@ jobs:
                     echo "$DIR is not a React app."
                   fi
                 done
+            - name: Commit and Push Changes
+              run: |
+                git config --local user.email "action@github.com"
+                git config --local user.name "GitHub Action"
+                git add .
+                git commit -m "Automated build commit" -a || echo "No changes to commit"
+                git push
             - name: publish
               run: npm publish --access public
               working-directory: package
