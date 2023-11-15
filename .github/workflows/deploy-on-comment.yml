@@ -21,15 +21,8 @@ jobs:
           git config --local user.name "GitHub Action"
           git fetch origin gh-pages
           git checkout -b gh-pages origin/gh-pages
-          mkdir -p build
-          cp -r package/* build/
+          mkdir -p build/${{ github.event.issue.number }}/
+          cp -r package/* build/${{ github.event.issue.number }}/
           git add build/
           git commit -m "Deploy static files to gh-pages"
           git push origin gh-pages
-
-      - name: Comment on PR
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: Deployed to [https://${{ github.repository_owner }}.github.io/${{ github.repository }}/build/${GITHUB_REF##*/}] (https://${{ github.repository_owner }}.github.io/${{ github.repository }}/build/${GITHUB_REF##*/})
-
