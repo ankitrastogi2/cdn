@@ -22,11 +22,11 @@ jobs:
 
       - name: Deploy package to deployBranch
         run: |
-          echo "Branch name is: ${GITHUB_REF#refs/heads/}"
           git fetch
           git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
           git checkout ${{github.event.ref}} -- package
+          echo "Branch name is: ${GITHUB_REF#refs/heads/}"
           cp -r package/* build/${{ github.event.issue.number }}/
           git add build/
           git commit -m "Deploy static files"
