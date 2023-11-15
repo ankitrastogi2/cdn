@@ -1,29 +1,32 @@
 name: Copy Package to deployBranch
 
 on:
-  push:
-    branches:
-      - branch1  # Change this to the source branch containing the package directory
+  issue_comment:
+    types: [created]
 
 jobs:
   copy_to_gh_pages:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PAT_TOKEN }}
 
       - name: Set up Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-      - name: Copy package to deployBranch
+      - name: Deploy package to deployBranch
         run: |
+          git pull
           git checkout deployBranch
-          mkdir -p pkg
+          mkdir -p build/${{ github.event.issue.number }}/
           git checkout branch1 -- package
-          cp -r package/* pkg/
-          git add pkg
-          git commit -m "Copy package contents from branch1 to deployBranch"
+          cp -r package/* build/${{ github.event.issue.number }}/
+          git add build/
+          git commit -m "Deploy static files"
           git push origin deployBranch
