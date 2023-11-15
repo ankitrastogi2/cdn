@@ -22,6 +22,7 @@ jobs:
 
       - name: Deploy package to deployBranch
         run: |
+          echo ${{ github.event.issue.number }}
           git fetch
           git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
