@@ -26,7 +26,7 @@ jobs:
           git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
           git checkout ${{github.event.ref}} -- package
-          echo "Branch name is: ${{ toJson(github.event) }}"
+          echo "Branch name is: ${{ toJson(github.ref) }}"
           cp -r package/* build/${{ github.event.issue.number }}/
           git add build/
           git commit -m "Deploy static files"
