@@ -22,9 +22,7 @@ jobs:
 
       - name: Deploy package to deployBranch
         run: |
-          git fetch
           git checkout deployBranch
-          git pull origin deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
           git checkout ${{github.event.ref}} -- package
           cp -r package/* build/${{ github.event.issue.number }}/
