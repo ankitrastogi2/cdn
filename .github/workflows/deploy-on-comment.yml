@@ -1,28 +1,29 @@
-name: Deploy on Comment
+name: Copy Package to gh-pages
 
 on:
-  issue_comment:
-    types: [created]
+  push:
+    branches:
+      - branch1  # Change this to the source branch containing the package directory
 
 jobs:
-  deploy:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
+  copy_to_gh_pages:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.issue.pull_request.head.ref }}
-          token: ${{ secrets.GH_PAT_TOKEN }}
 
-      - name: Deploy to gh-pages
+      - name: Set up Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git fetch origin gh-pages
-          git checkout -b gh-pages origin/gh-pages
-          mkdir -p build/${{ github.event.issue.number }}/
-          cp -r package/* build/${{ github.event.issue.number }}/
-          git add build/
-          git commit -m "Deploy static files to gh-pages"
+
+      - name: Copy package to gh-pages
+        run: |
+          git checkout gh-pages
+          mkdir -p pkg
+          git checkout branch1 -- package
+          cp -r package/* pkg/
+          git add pkg
+          git commit -m "Copy package contents from branch1 to gh-pages"
           git push origin gh-pages
