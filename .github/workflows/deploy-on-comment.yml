@@ -22,7 +22,7 @@ jobs:
 
       - name: Deploy package to deployBranch
         run: |
-          echo ${{ github.event.ref }}
+          echo "Branch name is: ${GITHUB_REF#refs/heads/}"
           git fetch
           git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
