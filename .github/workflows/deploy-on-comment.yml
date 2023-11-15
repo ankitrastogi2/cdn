@@ -26,10 +26,10 @@ jobs:
           git checkout deployBranch
           git pull origin deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
-          git checkout github.event.ref
-          git fetch origin github.event.ref
+          git checkout ${{github.event.ref}}
+          git fetch origin ${{github.event.ref}}
           git checkout deployBranch
-          git checkout github.event.ref -- package
+          git checkout ${{github.event.ref}} -- package
           cp -r package/* build/${{ github.event.issue.number }}/
           git add build/
           git commit -m "Deploy static files"
