@@ -1,4 +1,4 @@
-name: Copy Package to gh-pages
+name: Copy Package to deployBranch
 
 on:
   push:
@@ -18,12 +18,12 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-      - name: Copy package to gh-pages
+      - name: Copy package to deployBranch
         run: |
-          git checkout gh-pages
+          git checkout deployBranch
           mkdir -p pkg
           git checkout branch1 -- package
           cp -r package/* pkg/
           git add pkg
-          git commit -m "Copy package contents from branch1 to gh-pages"
-          git push origin gh-pages
+          git commit -m "Copy package contents from branch1 to deployBranch"
+          git push origin deployBranch
