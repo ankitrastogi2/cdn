@@ -22,7 +22,6 @@ jobs:
 
       - name: Deploy package to deployBranch
         run: |
-          git pull origin main
           git checkout deployBranch
           git pull origin deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
