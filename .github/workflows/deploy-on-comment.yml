@@ -22,7 +22,7 @@ jobs:
 
       - name: Copy package to deployBranch
         run: |
-          git checkout -b deployBranch
+          git checkout deployBranch
           mkdir -p pkg
           git checkout branch1 -- package
           cp -r package/* pkg/
