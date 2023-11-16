@@ -41,6 +41,10 @@ jobs:
             git add build/
             git commit -m "Deploy static files"
             git push origin deployBranch
+          else
+            # If no changes, print a message
+            echo "No changes to commit."
+          fi
       - name: Comment on PR
         run: |
           PR_NUMBER=${{ github.event.pull_request.number }}
