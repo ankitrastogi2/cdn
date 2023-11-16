@@ -40,3 +40,13 @@ jobs:
           git add build/
           git commit -m "Deploy static files"
           git push origin deployBranch
+      - name: Comment on PR
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          COMMENT="Your comment goes here"
+  
+          # Use GitHub API to add a comment to the pull request
+          curl -sSL -H "Authorization: Bearer ${{ secrets.GH_PAT_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -X POST -d "{\"body\":\"$COMMENT\"}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
