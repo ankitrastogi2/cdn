@@ -21,6 +21,8 @@ jobs:
                   registry-url: https://registry.npmjs.org
             - name: Increment package version
               run: |
+                git config --local user.email "action@github.com"
+                git config --local user.name "GitHub Action"
                 cd package/
                 npm version patch -m "Increment package version to %s"
                 git pull
