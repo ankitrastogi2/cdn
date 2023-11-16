@@ -37,9 +37,10 @@ jobs:
           mkdir -p build/${{ github.event.issue.number }}/
           git checkout $branch -- package
           cp -r package/* build/${{ github.event.issue.number }}/
-          git add build/
-          git commit -m "Deploy static files"
-          git push origin deployBranch
+          if [[ $(git status --porcelain) ]]; then
+            git add build/
+            git commit -m "Deploy static files"
+            git push origin deployBranch
       - name: Comment on PR
         run: |
           PR_NUMBER=${{ github.event.pull_request.number }}
