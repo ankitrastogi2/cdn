@@ -19,14 +19,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-      - name: Get Pull Request Information
-        id: pr
-        run: |
-          issue_number=$(echo "${{ github.event.issue.number }}")
-          pr_info=$(curl -sSL -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                    "https://api.github.com/repos/${{ github.repository }}/issues/${issue_number}")
-
-          echo "::set-output name=pr_info::$pr_info"
       - name: Deploy package to deployBranch
         run: |
           issue_number="${{ github.event.issue.number }}"
