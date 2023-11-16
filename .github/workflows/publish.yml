@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '**/build/**'
+      - 'package/package.json'
 
 jobs:
     publish:
