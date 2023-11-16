@@ -28,11 +28,19 @@ jobs:
 
           echo "::set-output name=pr_info::$pr_info"
   
-      - name: Extract Branch Name
+      - name: Get Branch from Issue
         run: |
-          pr_url=$( steps.pr.outputs.pr_info | fromJSON | .pull_request.url )
-          branch_name=$(basename $pr_url)
-          echo "Branch name is: $branch_name"
+          issue_number="${{ github.event.issue.number }}"
+          repo_owner="${{ github.event.repository.owner.login }}"
+          repo_name="${{ github.event.repository.name }}"
+          
+          # Use GitHub API to get issue details
+          issue_data=$(curl -s "https://api.github.com/repos/${repo_owner}/${repo_name}/issues/${issue_number}")
+          
+          # Extract branch information from issue data (adjust this based on the structure of your issue data)
+          branch=$(echo "$issue_data" | jq -r '.head.ref')
+  
+          echo "Branch associated with the issue: $branch"
       - name: Deploy package to deployBranch
         run: |
           git fetch
