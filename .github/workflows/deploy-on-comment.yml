@@ -47,11 +47,11 @@ jobs:
           fi
       - name: Comment on PR
         run: |
-          PR_NUMBER=${{ github.event.pull_request.number }}
+          PR_NUMBER=${{ github.event.issue.number }}
           COMMENT="Your comment goes here"
   
           # Use GitHub API to add a comment to the pull request
           curl -sSL -H "Authorization: Bearer ${{ secrets.GH_PAT_TOKEN }}" \
             -H "Content-Type: application/json" \
             -X POST -d "{\"body\":\"$COMMENT\"}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
+            "https://api.github.com/repos/${{ github.event.repository.name }}/issues/${PR_NUMBER}/comments"
