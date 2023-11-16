@@ -47,7 +47,7 @@ jobs:
           fi
       - name: Comment on PR
         run: |
-          COMMENT="Your comment goes here"
+          COMMENT="The PR is Deployed at :  https://${{github.event.repository.owner.login}}.github.io/${{ github.event.repository.name }}/build/${{github.event.issue.number}}/"
   
           # Use GitHub API to add a comment to the pull request
           curl -sSL -H "Authorization: Bearer ${{ secrets.GH_PAT_TOKEN }}" \
