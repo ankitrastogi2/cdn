@@ -33,22 +33,16 @@ jobs:
           issue_number="${{ github.event.issue.number }}"
           repo_owner="${{ github.event.repository.owner.login }}"
           repo_name="${{ github.event.repository.name }}"
-          
-          # Use GitHub API to get issue details
-          issue_data=$(curl -s "https://api.github.com/repos/${repo_owner}/${repo_name}/pulls/${issue_number}")
-          
+          issue_data=$(curl -s "https://api.github.com/repos/${repo_owner}/${repo_name}/pulls/${issue_number}")          
           # Extract branch information from issue data (adjust this based on the structure of your issue data)
           branch=$(echo "$issue_data" | jq -r '.head.ref')
-  
-          echo "issue_data with the issue: $issue_data"
-          echo "Branch associated with the issue: $branch"
       - name: Deploy package to deployBranch
         run: |
+          echo "Branch associated with the issue: $branch"
           git fetch
           git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
           git checkout ${{github.event.ref}} -- package
-          echo "Branch name is: ${{ toJson(github.event.repository.branches_url) }}"
           cp -r package/* build/${{ github.event.issue.number }}/
           git add build/
           git commit -m "Deploy static files"
