@@ -37,6 +37,20 @@ jobs:
           mkdir -p build/${{ github.event.issue.number }}/
           git checkout $branch -- package
           cp -r package/* build/${{ github.event.issue.number }}/
-          git add build/
-          git commit -m "Deploy static files"
-          git push origin deployBranch
+          if [[ $(git status --porcelain) ]]; then
+            git add build/
+            git commit -m "Deploy static files"
+            git push origin deployBranch
+          else
+            # If no changes, print a message
+            echo "No changes to commit."
+          fi
+      - name: Comment on PR
+        run: |
+          COMMENT="The PR is Deployed at :  https://${{github.event.repository.owner.login}}.github.io/${{ github.event.repository.name }}/build/${{github.event.issue.number}}/"
+  
+          # Use GitHub API to add a comment to the pull request
+          curl -sSL -H "Authorization: Bearer ${{ secrets.GH_PAT_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -X POST -d "{\"body\":\"$COMMENT\"}" \
+            "https://api.github.com/repos/${{github.event.repository.owner.login}}/${{ github.event.repository.name }}/issues/${{github.event.issue.number}}/comments"
