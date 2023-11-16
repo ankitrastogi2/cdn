@@ -2,8 +2,6 @@ name: "publish npm"
 
 on:
   push:
-    branches:
-      - main
     paths-ignore:
       - '**/build/**'
       - 'package/package.json'
@@ -45,6 +43,7 @@ jobs:
                 git commit -m "Automated build commit" -a || echo "No changes to commit"
                 git push
             - name: Increment package version
+              if: github.ref == 'refs/heads/main'
               run: |
                 cd package/
                 npm version patch -m "Increment package version to %s"
@@ -53,6 +52,7 @@ jobs:
                 git commit -m 'Updated version'
                 git push
             - name: publish
+              if: github.ref == 'refs/heads/main'
               run: npm publish --access public
               working-directory: package
               env:
