@@ -1,12 +1,9 @@
-name: "publish npm"
+name: "Publish package to npm"
 
 on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '**/build/**'
-      - 'package/package.json'
 
 jobs:
     publish:
@@ -22,28 +19,6 @@ jobs:
               with:
                   node-version: 18
                   registry-url: https://registry.npmjs.org
-            - name: Find React apps and Build
-              run: |
-                for DIR in package/*/ ; do
-                  if git diff --name-only HEAD^ HEAD | grep -q "^$DIR"; then
-                    if [ -f "$DIR/package.json" ]; then
-                      echo "Building React app in $DIR"
-                      (cd $DIR && npm install && npm run build -- --output-path ./build)
-                    else
-                      echo "$DIR is not a React app."
-                    fi
-                  else
-                    echo "No changes detected in $DIR"
-                  fi
-                done
-            - name: Commit and Push Changes
-              run: |
-                git config --local user.email "action@github.com"
-                git config --local user.name "GitHub Action"
-                git pull
-                git add .
-                git commit -m "Automated build commit" -a || echo "No changes to commit"
-                git push
             - name: Increment package version
               run: |
                 cd package/

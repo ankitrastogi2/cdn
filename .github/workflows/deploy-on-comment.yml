@@ -1,4 +1,4 @@
-name: Copy Package to deployBranch
+name: Deploy Branch to github pages
 
 on:
   issue_comment:
