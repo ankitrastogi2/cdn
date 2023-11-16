@@ -39,7 +39,7 @@ jobs:
           git fetch
           git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
-          git checkout branch2 -- package
+          git checkout $branch -- package
           cp -r package/* build/${{ github.event.issue.number }}/
           git add build/
           git commit -m "Deploy static files"
