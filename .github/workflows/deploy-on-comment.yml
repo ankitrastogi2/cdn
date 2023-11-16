@@ -53,4 +53,4 @@ jobs:
           curl -sSL -H "Authorization: Bearer ${{ secrets.GH_PAT_TOKEN }}" \
             -H "Content-Type: application/json" \
             -X POST -d "{\"body\":\"$COMMENT\"}" \
-            "https://api.github.com/repos/${{ github.event.repository.name }}/issues/${{github.event.issue.number}}/comments"
+            "https://api.github.com/repos/${{github.event.repository.owner.login}}/${{ github.event.repository.name }}/issues/${{github.event.issue.number}}/comments"
