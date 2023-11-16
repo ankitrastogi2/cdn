@@ -27,8 +27,7 @@ jobs:
                     "https://api.github.com/repos/${{ github.repository }}/issues/${issue_number}")
 
           echo "::set-output name=pr_info::$pr_info"
-  
-      - name: Get Branch from Issue
+      - name: Deploy package to deployBranch
         run: |
           issue_number="${{ github.event.issue.number }}"
           repo_owner="${{ github.event.repository.owner.login }}"
@@ -36,8 +35,6 @@ jobs:
           issue_data=$(curl -s "https://api.github.com/repos/${repo_owner}/${repo_name}/pulls/${issue_number}")          
           # Extract branch information from issue data (adjust this based on the structure of your issue data)
           branch=$(echo "$issue_data" | jq -r '.head.ref')
-      - name: Deploy package to deployBranch
-        run: |
           echo "Branch associated with the issue: $branch"
           git fetch
           git checkout deployBranch
