@@ -40,6 +40,7 @@ jobs:
           # Extract branch information from issue data (adjust this based on the structure of your issue data)
           branch=$(echo "$issue_data" | jq -r '.head.ref')
   
+          echo "issue_data with the issue: $issue_data"
           echo "Branch associated with the issue: $branch"
       - name: Deploy package to deployBranch
         run: |
