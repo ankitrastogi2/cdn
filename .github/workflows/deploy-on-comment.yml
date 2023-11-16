@@ -38,8 +38,12 @@ jobs:
           echo "Branch associated with the issue: $branch"
           git pull
           git checkout deployBranch
+          git pull
+          git checkout $branch
+          git pull
+          git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
-          git checkout ankit-test -- package
+          git checkout $branch -- package
           cp -r package/* build/${{ github.event.issue.number }}/
           git add build/
           git commit -m "Deploy static files"
