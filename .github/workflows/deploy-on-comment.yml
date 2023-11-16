@@ -39,7 +39,7 @@ jobs:
           git pull
           git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
-          git checkout $branch -- package
+          git checkout ankit-test -- package
           cp -r package/* build/${{ github.event.issue.number }}/
           git add build/
           git commit -m "Deploy static files"
