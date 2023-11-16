@@ -36,7 +36,7 @@ jobs:
           # Extract branch information from issue data (adjust this based on the structure of your issue data)
           branch=$(echo "$issue_data" | jq -r '.head.ref')
           echo "Branch associated with the issue: $branch"
-          git fetch
+          git pull
           git checkout deployBranch
           mkdir -p build/${{ github.event.issue.number }}/
           git checkout $branch -- package
