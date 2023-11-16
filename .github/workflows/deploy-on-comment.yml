@@ -35,7 +35,7 @@ jobs:
           repo_name="${{ github.event.repository.name }}"
           
           # Use GitHub API to get issue details
-          issue_data=$(curl -s "https://api.github.com/repos/${repo_owner}/${repo_name}/issues/${issue_number}")
+          issue_data=$(curl -s "https://api.github.com/repos/${repo_owner}/${repo_name}/pulls/${issue_number}")
           
           # Extract branch information from issue data (adjust this based on the structure of your issue data)
           branch=$(echo "$issue_data" | jq -r '.head.ref')
